@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebus-simple-project", "Rebus-simple-project\Rebus-simple-project.csproj", "{43D9FE0D-472B-445E-83BE-449FD4D9B0E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{BBD545B1-CFF7-40FE-9E52-4F2662ACCD11}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43D9FE0D-472B-445E-83BE-449FD4D9B0E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43D9FE0D-472B-445E-83BE-449FD4D9B0E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43D9FE0D-472B-445E-83BE-449FD4D9B0E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43D9FE0D-472B-445E-83BE-449FD4D9B0E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBD545B1-CFF7-40FE-9E52-4F2662ACCD11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBD545B1-CFF7-40FE-9E52-4F2662ACCD11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBD545B1-CFF7-40FE-9E52-4F2662ACCD11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBD545B1-CFF7-40FE-9E52-4F2662ACCD11}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F0B58148-FDF6-4B3E-AC5B-06DE22794197}
+	EndGlobalSection
+EndGlobal
