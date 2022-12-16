@@ -14,7 +14,8 @@ namespace Rebus_simple_project.Controllers
             _logger = logger;
         }
         [HttpPost]
-        public IActionResult SignUp() 
+        [Route("SignUp")]
+        public IActionResult SignUp(NewCustomer newCustomer) 
         {
             return null;
         }         
