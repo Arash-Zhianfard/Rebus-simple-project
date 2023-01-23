@@ -1,16 +1,48 @@
 ﻿using Common.Models;
+using Rebus.Handlers;
 using Rebus.Sagas;
 
 namespace Common
 {
-    public class OrderSaga : Saga<OrderData>
+    public class OrderSaga : Saga<OrderData>,IAmInitiatedBy<OnNewOrder>,
+        IHandleMessages<OrderCreated>,
+        IHandleMessages<PaymentFinished>,
+        IHandleMessages<InventoryUpdated>,
+        IHandleMessages<EmailSent>
     {
+        
+
+
         protected override void CorrelateMessages(ICorrelationConfig<OrderData> config)
         {
-            config.Correlate<OnOrderCreate>(x => x.Id, nameof(OrderData.OrderId));
-            config.Correlate<OnCreatePayment>(x => x.Id, nameof(OrderData.PaymentId));
-            config.Correlate<OnUpdateInventory>(x => x.Id, nameof(OrderData.InventoryItemId));
-            config.Correlate<OnSendEmail>(x => x.Id, nameof(OrderData.EmailId));
+            config.Correlate<OnNewOrder>(x => x.OderId, nameof(OrderData.OrderId));
+            config.Correlate<PaymentFinished>(x => x.Id, nameof(OrderData.PaymentId));
+            config.Correlate<InventoryUpdated>(x => x.Id, nameof(OrderData.InventoryItemId));
+            config.Correlate<EmailSent>(x => x.Email, nameof(OrderData.CustomerEmail));
+        }
+        public Task Handle(OnNewOrder message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Handle(PaymentFinished message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Handle(OrderCreated message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Handle(EmailSent message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Handle(InventoryUpdated message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

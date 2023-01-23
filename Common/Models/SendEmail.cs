@@ -1,6 +1,6 @@
-﻿namespace Common
+﻿namespace Common.Models
 {
-    public class SendEmail
+    public record SendEmail
     {
         public string Email { get; set; }
         public string Content { get; set; }

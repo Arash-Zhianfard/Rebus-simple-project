@@ -1,6 +1,6 @@
 ﻿namespace Common.Models
 {
-    public record OnUpdateInventory
+    public record InventoryUpdated
     {
         public int Id { get; set; }
     }

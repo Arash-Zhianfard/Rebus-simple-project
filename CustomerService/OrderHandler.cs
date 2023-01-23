@@ -1,19 +1,39 @@
 ﻿using Common.Models;
+using Rebus.Bus;
 using Rebus.Handlers;
+using Rebus.Sagas;
 
 namespace CustomerService
 {
-    public class CreateOrderHandler : IHandleMessages<OnOrderCreate>
+    public class CreateOrderHandler : Saga<OrderData>, IHandleMessages<OnNewOrder>
     {
-        public Task Handle(OnOrderCreate message)
+        private readonly IBus _bus;
+
+        public CreateOrderHandler(IBus bus)
         {
-            throw new NotImplementedException();
+            _bus = bus;
+        }
+        public async Task Handle(OnNewOrder message)
+        {
+            var order = CreateOrder(message);
+            await _bus.Send(new OnCreatePayment() { OrderId = order });
+            
+            
+        }
+
+        private int CreateOrder(OnNewOrder message)
+        {
+            /*
+             implimentation detial for creating Order 
+            */
+
+            return new Random().Next(0, 100);
         }
     }
 
-    public class CancelOrderHandler : IHandleMessages<OnOrderCreate>
+    public class CancelOrderHandler : IHandleMessages<OnNewOrder>
     {
-        public Task Handle(OnOrderCreate message)
+        public Task Handle(OnNewOrder message)
         {
             throw new NotImplementedException();
         }

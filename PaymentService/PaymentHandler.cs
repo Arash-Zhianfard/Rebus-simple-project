@@ -3,9 +3,9 @@ using Rebus.Handlers;
 
 namespace PaymentService
 {
-    internal class PaymentHandler : IHandleMessages<OnOrderCreate>
+    internal class PaymentHandler : IHandleMessages<OnNewOrder>
     {
-        public Task Handle(OnOrderCreate message)
+        public Task Handle(OnNewOrder message)
         {
             throw new NotImplementedException();
         }

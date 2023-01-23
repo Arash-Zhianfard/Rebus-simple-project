@@ -1,4 +1,5 @@
-﻿using CustomerService;
+﻿using Common.Models;
+using CustomerService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rebus.Auditing.Messages;

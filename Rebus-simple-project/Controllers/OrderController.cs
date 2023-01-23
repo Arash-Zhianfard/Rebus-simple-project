@@ -5,20 +5,19 @@ using System.Diagnostics;
 namespace Rebus_simple_project.Controllers
 {
     [Route("api/[controller]")]
-    public class CustomerController : Controller
+    public class OrderController : Controller
     {
-        private readonly ILogger<CustomerController> _logger;
+        private readonly ILogger<OrderController> _logger;
 
-        public CustomerController(ILogger<CustomerController> logger)
+        public OrderController(ILogger<OrderController> logger)
         {
             _logger = logger;
         }
 
         [HttpPost]
         [Route("SignUp")]
-        public async Task<IActionResult> Add([FromBody]NewCustomer newCustomer)        
+        public async Task<IActionResult> Add([FromBody]NewOrder newCustomer)        
         {
-
             return null;
         }         
     }

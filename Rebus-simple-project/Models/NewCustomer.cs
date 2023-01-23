@@ -1,8 +1,8 @@
 namespace Rebus_simple_project.Models
 {
-    public class NewCustomer
+    public class NewOrder
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
+        public int ProductId { get; set; }
+        public int CustomerId { get; set; }
     }
 }
