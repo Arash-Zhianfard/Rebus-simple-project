@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OrderService.Models;
 using Rebus.Bus;
-using Rebus_simple_project.Models;
 using System.Diagnostics;
 
-namespace Rebus_simple_project.Controllers
+namespace OrderService.Controllers
 {
     [Route("api/[controller]")]
     public class OrderController : Controller
@@ -20,7 +20,7 @@ namespace Rebus_simple_project.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] OrderRequest newCustomer)
         {
-            
+
 
             await _bus.Send(newCustomer);
             return Ok();

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Rebus_simple_project.Models;
+using PaymentService.Models;
 
-namespace Rebus_simple_project
+namespace PaymentService
 {
     public class AppContext : DbContext
     {

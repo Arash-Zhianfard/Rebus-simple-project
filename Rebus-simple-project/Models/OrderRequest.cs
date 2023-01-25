@@ -1,4 +1,4 @@
-namespace Rebus_simple_project.Models
+namespace OrderService.Models
 {
     public class OrderRequest
     {

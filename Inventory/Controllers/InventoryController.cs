@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InventoryService.Models;
+using Microsoft.AspNetCore.Mvc;
 using Rebus.Bus;
-using Rebus_simple_project.Models;
 using System.Diagnostics;
 
-namespace Rebus_simple_project.Controllers
+namespace InventoryService.Controllers
 {
     [Route("api/[controller]")]
     public class InventoryController : Controller

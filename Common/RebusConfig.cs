@@ -1,10 +1,9 @@
-﻿using Common;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rebus.Bus;
 using Rebus.ServiceProvider;
 
-namespace CustomerService
+namespace Common
 {
     public class RebusConfig : IDisposable
     {

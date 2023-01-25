@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PaymentService.Models;
 using Rebus.Bus;
-using Rebus_simple_project.Models;
 using System.Diagnostics;
 
-namespace Rebus_simple_project.Controllers
+namespace PaymentService.Controllers
 {
     [Route("api/[controller]")]
     public class PayamentController : Controller

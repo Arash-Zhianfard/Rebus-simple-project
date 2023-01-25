@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Rebus_simple_project.Models;
+using OrderService.Models;
 
-namespace Rebus_simple_project
+namespace OrderService
 {
     public class AppContext : DbContext
     {

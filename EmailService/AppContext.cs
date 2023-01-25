@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Rebus_simple_project.Models;
+﻿using EmailService.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace Rebus_simple_project
+namespace EmailService
 {
     public class AppContext : DbContext
     {

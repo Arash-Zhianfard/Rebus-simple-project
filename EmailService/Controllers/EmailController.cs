@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EmailService.Models;
+using Microsoft.AspNetCore.Mvc;
 using Rebus.Bus;
-using Rebus_simple_project.Models;
 
-namespace Rebus_simple_project.Controllers
+namespace EmailService.Controllers
 {
     [Route("api/[controller]")]
     public class EmailController : Controller
