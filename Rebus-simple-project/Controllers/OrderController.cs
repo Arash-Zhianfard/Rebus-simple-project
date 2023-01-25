@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common.Models;
+using Microsoft.AspNetCore.Mvc;
 using OrderService.Models;
 using Rebus.Bus;
-using System.Diagnostics;
 
 namespace OrderService.Controllers
 {
@@ -20,9 +20,15 @@ namespace OrderService.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] OrderRequest newCustomer)
         {
+            var newOrder = new Order();
+            using (AppContext appContext = new())
+            {
+                appContext.Orders.Add(newOrder);
+                appContext.SaveChanges();
+            }
 
+            await _bus.Send(new OnNewOrder() { OderId = newOrder.Id });
 
-            await _bus.Send(newCustomer);
             return Ok();
         }
     }
