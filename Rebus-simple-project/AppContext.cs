@@ -7,9 +7,9 @@ namespace Rebus_simple_project
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: "PaymentDB");
+            optionsBuilder.UseInMemoryDatabase(databaseName: "AuthorDb");
         }
 
-        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }
