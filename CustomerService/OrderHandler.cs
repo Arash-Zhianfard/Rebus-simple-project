@@ -5,7 +5,7 @@ using Rebus.Sagas;
 
 namespace CustomerService
 {
-    public class CreateOrderHandler : Saga<OrderData>, IHandleMessages<OnNewOrder>
+    public class CreateOrderHandler : IHandleMessages<OnNewOrder>
     {
         private readonly IBus _bus;
 
@@ -16,15 +16,13 @@ namespace CustomerService
         public async Task Handle(OnNewOrder message)
         {
             var order = CreateOrder(message);
-            await _bus.Send(new OnCreatePayment() { OrderId = order });
-            
-            
+            await _bus.Reply(new OrderCreated() { OrderId = order });
         }
 
         private int CreateOrder(OnNewOrder message)
         {
             /*
-             implimentation detial for creating Order 
+               Implementation detial 
             */
 
             return new Random().Next(0, 100);

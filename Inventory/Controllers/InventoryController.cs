@@ -6,24 +6,21 @@ using System.Diagnostics;
 namespace Rebus_simple_project.Controllers
 {
     [Route("api/[controller]")]
-    public class OrderController : Controller
+    public class InventoryController : Controller
     {
-        private readonly ILogger<OrderController> _logger;
+        private readonly ILogger<InventoryController> _logger;
         private readonly IBus _bus;
 
-        public OrderController(ILogger<OrderController> logger, IBus bus)
+        public InventoryController(ILogger<InventoryController> logger, IBus bus)
         {
             _logger = logger;
             _bus = bus;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] OrderRequest newCustomer)
+        public Task<IActionResult> Post([FromBody] InventoryUpdateRequst newCustomer)
         {
-            
-
-            await _bus.Send(newCustomer);
-            return Ok();
+            return null;
         }
     }
 }

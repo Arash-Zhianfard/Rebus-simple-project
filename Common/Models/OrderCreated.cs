@@ -2,5 +2,6 @@
 {
     public record OrderCreated
     {
+        public int OrderId { get; set; }
     }
 }

@@ -1,34 +1,18 @@
-﻿using CustomerService;
-using Microsoft.Extensions.Configuration;
-using Serilog;
-using Topper;
+﻿using Common;
+using Microsoft.OpenApi.Models;
 
-namespace Processor
-{
-    static class Program
-    {
-        private static IConfiguration Configuration { get; set; }
+var builder = WebApplication.CreateBuilder(args);
 
-        static void Main()
-        {
-            Log.Logger = new LoggerConfiguration()
-               .WriteTo.Console()
-               .CreateLogger();
+// Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "simple rebus scenario", Version = "v1" }); });
+builder.Services.AddRebusService(builder.Configuration);
+var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EntryPointAPI v1"));
+app.UseStaticFiles();
 
-            ReadConfiguration();
+app.UseRouting();
 
-            var serviceConfiguration = new ServiceConfiguration()
-               .Add("RebusConfig", () => new RebusConfig(Configuration));
-
-            ServiceHost.Run(serviceConfiguration);
-        }
-
-        private static void ReadConfiguration()
-        {
-            var builder =
-                new ConfigurationBuilder()
-                   .AddJsonFile("appsettings.json", optional: false);
-            Configuration = builder.Build();
-        }
-    }
-}
+app.UseAuthorization();
+app.Run();

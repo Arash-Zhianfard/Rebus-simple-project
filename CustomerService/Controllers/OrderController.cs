@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rebus.Bus;
 using Rebus_simple_project.Models;
 using System.Diagnostics;
 
@@ -9,21 +8,17 @@ namespace Rebus_simple_project.Controllers
     public class OrderController : Controller
     {
         private readonly ILogger<OrderController> _logger;
-        private readonly IBus _bus;
 
-        public OrderController(ILogger<OrderController> logger, IBus bus)
+        public OrderController(ILogger<OrderController> logger)
         {
             _logger = logger;
-            _bus = bus;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] OrderRequest newCustomer)
+        [Route("SignUp")]
+        public async Task<IActionResult> Add([FromBody]NewOrder newCustomer)        
         {
-            
-
-            await _bus.Send(newCustomer);
-            return Ok();
-        }
+            return null;
+        }         
     }
 }
