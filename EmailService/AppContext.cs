@@ -7,9 +7,9 @@ namespace Rebus_simple_project
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: "InventoryDB");
+            optionsBuilder.UseInMemoryDatabase(databaseName: "EmailDB");
         }
 
-        public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<Email> Emails { get; set; }
     }
 }
