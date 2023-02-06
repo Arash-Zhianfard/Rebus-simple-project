@@ -22,7 +22,7 @@ namespace Common
         protected override void CorrelateMessages(ICorrelationConfig<OrderData> config)
         {
             config.Correlate<OnNewOrder>(x => x.OderId, nameof(OrderData.OrderId));
-            config.Correlate<PaymentFinished>(x => x.Id, nameof(OrderData.PaymentId));
+            config.Correlate<PaymentFinished>(x => x.PaymentId, nameof(OrderData.PaymentId));
             config.Correlate<InventoryUpdated>(x => x.Id, nameof(OrderData.InventoryItemId));
             config.Correlate<EmailSent>(x => x.Email, nameof(OrderData.CustomerEmail));
         }
@@ -39,20 +39,30 @@ namespace Common
         {
             Data.PaymentId = message.PaymentId;
             Data.PayementFinished = true;
-            //call Email Service
-            var emailClient = _httpClientFactory.CreateClient("Email");
-            await emailClient.PostAsync("", new StringContent(JsonConvert.SerializeObject(new { message.PaymentId })));
+            //call Inventory Service
+            var inventoryClient = _httpClientFactory.CreateClient("Inventory");
+            await inventoryClient.PostAsync("", new StringContent(JsonConvert.SerializeObject(new { message.PaymentId })));
         }
 
-        public Task Handle(EmailSent message)
+        public async Task Handle(InventoryUpdated message)
         {
-            throw new NotImplementedException();
+            Data.InventoryItemId = message.Id;
+            Data.InventoryItemUpdated = true;
+            //call Inventory Service
+            var inventoryClient = _httpClientFactory.CreateClient("Email");
+            await inventoryClient.PostAsync("", new StringContent(JsonConvert.SerializeObject(new { message.Id })));
         }
 
-        public Task Handle(InventoryUpdated message)
+        public async Task Handle(EmailSent message)
         {
-            throw new NotImplementedException();
-        }
+            Data.CustomerEmail = message.Email;
+            Data.EmailSent = true;
+
+            if (Data.OrderCreated)
+            {
+                MarkAsComplete();
+            }
+        }        
     }
 }
 

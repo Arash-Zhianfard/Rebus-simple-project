@@ -13,7 +13,7 @@ namespace Common.Models
         public Guid OrderId { get; set; }
         public int PaymentId { get; set; }
         public int InventoryItemId { get; set; }
-        public int CustomerEmail { get; set; }
+        public string CustomerEmail { get; set; }
         public bool OrderCompleted => OrderCreated && InventoryItemUpdated && PayementFinished && EmailSent;
     }
 }

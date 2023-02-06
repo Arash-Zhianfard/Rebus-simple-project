@@ -19,7 +19,7 @@ namespace PaymentService.Controllers
         }
 
         [HttpPost]
-        public Task<IActionResult> Post([FromBody] PaymentRequst paymentRequst)
+        public async Task<IActionResult> Post([FromBody] PaymentRequst paymentRequst)
         {
             var newPayment = new Payment();
             using (AppContext appContext = new())
@@ -28,7 +28,7 @@ namespace PaymentService.Controllers
                 appContext.SaveChanges();
             }
 
-            await _bus.Send(new OnNewOrder() { OderId = newPayment.Id });
+            await _bus.Send(new PaymentFinished() { PaymentId = newPayment.Id });
 
             return Ok();
         }
