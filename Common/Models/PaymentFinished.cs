@@ -2,6 +2,6 @@
 {
     public record PaymentFinished
     {
-        public int Id { get; set; }
+        public int PaymentId { get; set; }
     }
 }

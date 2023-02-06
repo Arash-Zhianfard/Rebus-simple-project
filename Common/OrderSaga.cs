@@ -1,14 +1,24 @@
 ﻿using Common.Models;
+using Newtonsoft.Json;
+using Rebus.Bus;
 using Rebus.Handlers;
 using Rebus.Sagas;
 
 namespace Common
 {
-    public class OrderSaga : Saga<OrderData>,IAmInitiatedBy<OrderCreated>,        
+    public class OrderSaga : Saga<OrderData>, IAmInitiatedBy<OrderCreated>,
         IHandleMessages<PaymentFinished>,
         IHandleMessages<InventoryUpdated>,
         IHandleMessages<EmailSent>
-    {      
+    {
+        private readonly IBus _bus;
+        IHttpClientFactory _httpClientFactory;
+        public OrderSaga(IBus bus, IHttpClientFactory httpClientFactory)
+        {
+            _bus = bus;
+            _httpClientFactory = httpClientFactory;
+        }
+
         protected override void CorrelateMessages(ICorrelationConfig<OrderData> config)
         {
             config.Correlate<OnNewOrder>(x => x.OderId, nameof(OrderData.OrderId));
@@ -17,15 +27,21 @@ namespace Common
             config.Correlate<EmailSent>(x => x.Email, nameof(OrderData.CustomerEmail));
         }
 
-        public Task Handle(OrderCreated message)
+        public async Task Handle(OrderCreated message)
         {
-            throw new NotImplementedException();
-            //call payament 
+            Data.OrderCreated = true;
+            //call payament
+            var paymentClient = _httpClientFactory.CreateClient("payment");
+            await paymentClient.PostAsync("", new StringContent(JsonConvert.SerializeObject(new { message.OrderId })));
         }
 
-        public Task Handle(PaymentFinished message)
+        public async Task Handle(PaymentFinished message)
         {
-            throw new NotImplementedException();
+            Data.PaymentId = message.PaymentId;
+            Data.PayementFinished = true;
+            //call Email Service
+            var emailClient = _httpClientFactory.CreateClient("Email");
+            await emailClient.PostAsync("", new StringContent(JsonConvert.SerializeObject(new { message.PaymentId })));
         }
 
         public Task Handle(EmailSent message)

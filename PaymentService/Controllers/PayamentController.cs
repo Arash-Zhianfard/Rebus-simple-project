@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common.Models;
+using Microsoft.AspNetCore.Mvc;
 using PaymentService.Models;
 using Rebus.Bus;
 using System.Diagnostics;
@@ -18,9 +19,18 @@ namespace PaymentService.Controllers
         }
 
         [HttpPost]
-        public Task<IActionResult> Post([FromBody] PaymentRequst newCustomer)
+        public Task<IActionResult> Post([FromBody] PaymentRequst paymentRequst)
         {
-            return null;
+            var newPayment = new Payment();
+            using (AppContext appContext = new())
+            {
+                appContext.Payments.Add(newPayment);
+                appContext.SaveChanges();
+            }
+
+            await _bus.Send(new OnNewOrder() { OderId = newPayment.Id });
+
+            return Ok();
         }
     }
 }
