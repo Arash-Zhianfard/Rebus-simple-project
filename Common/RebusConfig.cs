@@ -14,8 +14,7 @@ namespace Common
         {
             var services = new ServiceCollection();
             services.AddRebusService(configuration);
-            _provider = services.BuildServiceProvider();
-            _provider.UseRebus(x => _bus = x);
+            _provider = services.BuildServiceProvider();            
         }
 
         public void Dispose()
