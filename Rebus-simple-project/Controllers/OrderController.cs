@@ -5,7 +5,9 @@ using Rebus.Bus;
 
 namespace OrderService.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
+    [Produces("application/json")]
     public class OrderController : Controller
     {
         private readonly ILogger<OrderController> _logger;
@@ -16,8 +18,8 @@ namespace OrderService.Controllers
             _logger = logger;
             _bus = bus;
         }
-
-        [HttpPost]
+        
+        [HttpPost("Post")]
         public async Task<IActionResult> Post([FromBody] OrderRequest newCustomer)
         {
             var newOrder = new Order();
