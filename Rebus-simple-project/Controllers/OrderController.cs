@@ -18,7 +18,7 @@ namespace OrderService.Controllers
             _logger = logger;
             _bus = bus;
         }
-        
+
         [HttpPost("Post")]
         public async Task<IActionResult> Post([FromBody] OrderRequest newCustomer)
         {
@@ -29,7 +29,7 @@ namespace OrderService.Controllers
                 appContext.SaveChanges();
             }
 
-            await _bus.Send(new OnNewOrder() { OderId = newOrder.Id });
+            await _bus.Send(new OrderCreated() { OrderId = newOrder.Id });
 
             return Ok();
         }

@@ -21,7 +21,7 @@ namespace Common
 
         protected override void CorrelateMessages(ICorrelationConfig<OrderData> config)
         {
-            config.Correlate<OnNewOrder>(x => x.OderId, nameof(OrderData.OrderId));
+            config.Correlate<OrderCreated>(x => x.OrderId, nameof(OrderData.OrderId));
             config.Correlate<PaymentFinished>(x => x.PaymentId, nameof(OrderData.PaymentId));
             config.Correlate<InventoryUpdated>(x => x.Id, nameof(OrderData.InventoryItemId));
             config.Correlate<EmailSent>(x => x.Email, nameof(OrderData.CustomerEmail));
