@@ -10,7 +10,7 @@ builder.Services.AddRebusService(builder.Configuration);
 builder.Services.AddHttpClient();
 var app = builder.Build();
 app.UseSwagger();
-app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "OrderApi v1"));
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Order Api v1"));
 app.UseStaticFiles();
 app.MapControllers();
 app.UseRouting();
