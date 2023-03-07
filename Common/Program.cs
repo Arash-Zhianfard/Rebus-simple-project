@@ -18,7 +18,7 @@ namespace Common
 
             var serviceConfiguration = new ServiceConfiguration()
                .Add("OurBackendBus", () => new RebusConfig(Configuration));
-
+            
             ServiceHost.Run(serviceConfiguration);
         }
 

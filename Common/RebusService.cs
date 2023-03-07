@@ -24,8 +24,7 @@ namespace Common
                         })
                    .Transport(t => t.UseRabbitMq("amqp://localhost", "MainQueue")).Timeouts(t => t.StoreInMemory())
                    .Options(t => t.SimpleRetryStrategy(errorQueueAddress: "ErrorQueue"))
-                   .Options(t => t.EnableMessageAuditing(auditQueue: "AuditQueue")));
-
+                   .Options(t => t.EnableMessageAuditing(auditQueue: "AuditQueue")));       
             services.AutoRegisterHandlersFromAssemblyOf<RebusConfig>();
         }
     }
